@@ -13,7 +13,7 @@ module.exports = {
 		let port = options.port || 3000;
 
 		app.use(bodyParser.json());
-		mongoose.connect('mongodb://localhost/url-shortner');
+		mongoose.connect(options.mongoUri);
 		
 		routes(app);
 
