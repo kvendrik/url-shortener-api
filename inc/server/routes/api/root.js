@@ -1,6 +1,6 @@
 module.exports = function(app){
 
-	app.get('/', function(req, res){
+	app.get('/api', function(req, res){
 		let routePaths = {};
 		app._router.stack.forEach(function(details){
 			let route = details.route;

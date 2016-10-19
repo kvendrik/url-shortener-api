@@ -6,4 +6,10 @@ module.exports = function(app){
 			require('./'+filename)(app);
 		}
 	});
+
+	fs.readdirSync(__dirname+'/api').forEach(function(filename){
+		if(filename !== 'index.js' && /\.js$/.test(filename)){
+			require('./api/'+filename)(app);
+		}
+	});
 };

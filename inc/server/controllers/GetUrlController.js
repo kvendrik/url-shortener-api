@@ -10,19 +10,10 @@ var GetUrlController = function(req, res){
 		if(err) return logger.error(err);
 		
 		if(result){
-			res.json({
-				success: true,
-				data: {
-					url: result.originalUrl,
-					token: result.token
-				}
-			});
+			res.redirect(result.originalUrl);
 			logger.log('Get URL', 'Found', token+' > '+result.originalUrl);
 		} else {
-			res.json({
-				success: false,
-				message: 'URL not found'
-			});
+			res.send('404');
 			logger.log('Get URL', 'Not Found', token);
 		}
 	});

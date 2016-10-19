@@ -1,5 +1,5 @@
-let logger = require('../logger'),
-	UrlModel = require('../models/Url');
+let logger = require('../../logger'),
+	UrlModel = require('../../models/Url');
 
 var SaveUrlController = function(req, res){
 	let self = this,
@@ -10,14 +10,14 @@ var SaveUrlController = function(req, res){
 			success: false,
 			message: 'The url property is required but was not found in the request body'
 		});
-		logger.log('Shorten URL', 'URL Property Missing');
+		logger.log('API / Shorten URL', 'URL Property Missing');
 		return;
 	}
 
 	this._checkExists(url, function(result){
 		if(!result){
 			self._saveUrl(url, function(url, token){
-				res.json({
+				res.status(201).json({
 			  		success: true,
 			  		message: 'The url was saved',
 			  		data: {
@@ -25,7 +25,7 @@ var SaveUrlController = function(req, res){
 			  			originalUrl: url
 			  		}
 			  	});
-			  	logger.log('Shorten URL', 'Saved', url+' > '+token);
+			  	logger.log('API / Shorten URL', 'Saved', url+' > '+token);
 			});
 		} else {
 			let token = result.token;
@@ -37,7 +37,7 @@ var SaveUrlController = function(req, res){
 					originalUrl: result.originalUrl
 				}
 			});
-			logger.log('Shorten URL', 'Already Exists', url+' > '+token);
+			logger.log('API / Shorten URL', 'Already Exists', url+' > '+token);
 		}
 	});
 };
